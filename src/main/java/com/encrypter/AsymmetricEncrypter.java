@@ -17,6 +17,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
+import static com.encrypter.KeyGenerator.byteArrayToHexString;
+import static com.encrypter.KeyGenerator.hexStringToByteArray;
+
 public class AsymmetricEncrypter implements Encrypter {
     private String charsetName = "UTF-8";
     private String algorithm = "RSA";
@@ -32,8 +35,8 @@ public class AsymmetricEncrypter implements Encrypter {
         try {
             cipher = Cipher.getInstance(transformation, provider);
             KeyFactory keyFactory = KeyFactory.getInstance(algorithm);
-            publicKey = keyFactory.generatePublic(new X509EncodedKeySpec(Encrypter.hexStringToByteArray(publicKeyHexString)));
-            privateKey = keyFactory.generatePrivate(new PKCS8EncodedKeySpec(Encrypter.hexStringToByteArray(privateKeyHexString)));
+            publicKey = keyFactory.generatePublic(new X509EncodedKeySpec(hexStringToByteArray(publicKeyHexString)));
+            privateKey = keyFactory.generatePrivate(new PKCS8EncodedKeySpec(hexStringToByteArray(privateKeyHexString)));
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
             throw new RuntimeException("Failed to create encrypter");
@@ -60,29 +63,5 @@ public class AsymmetricEncrypter implements Encrypter {
             e.printStackTrace();
         }
         return null;
-    }
-
-    private static KeyPair _generateKeyPair() throws NoSuchAlgorithmException {
-        KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-        generator.initialize(2048);
-        return generator.generateKeyPair();
-    }
-
-    public static void generateKeyPair() {
-        try {
-            KeyPair kp = _generateKeyPair();
-            String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-
-            FileOutputStream fos = new FileOutputStream(now+"-public.key");
-            fos.write(Encrypter.byteArrayToHexString(kp.getPublic().getEncoded()).getBytes(StandardCharsets.UTF_8));
-
-            FileOutputStream fos2 = new FileOutputStream(now+"-private.key");
-            fos2.write(Encrypter.byteArrayToHexString(kp.getPrivate().getEncoded()).getBytes(StandardCharsets.UTF_8));
-
-            fos.close();
-            fos2.close();
-        } catch (NoSuchAlgorithmException | IOException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -16,6 +16,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
+import static com.encrypter.KeyGenerator.byteArrayToHexString;
+import static com.encrypter.KeyGenerator.hexStringToByteArray;
+
 public class SymmetricEncrypter implements Encrypter {
     private String charsetName = "UTF-8";
     private String algorithm = "AES";
@@ -26,7 +29,7 @@ public class SymmetricEncrypter implements Encrypter {
     private final Base64.Decoder base64Decoder = Base64.getDecoder();
 
     public SymmetricEncrypter(String mySecretKey) {
-        secretKey = new SecretKeySpec(Encrypter.hexStringToByteArray(mySecretKey), algorithm);
+        secretKey = new SecretKeySpec(hexStringToByteArray(mySecretKey), algorithm);
 
         try {
             cipher = Cipher.getInstance(transformation);
@@ -56,38 +59,5 @@ public class SymmetricEncrypter implements Encrypter {
             e.printStackTrace();
         }
         return null;
-    }
-
-
-    private static byte[] generateKey(int n) throws NoSuchAlgorithmException {
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-        keyGenerator.init(n);
-        SecretKey key = keyGenerator.generateKey();
-        return key.getEncoded();
-    }
-
-    public static void generateAndPrintKey() {
-        try {
-            // 1. Generate key byte array
-            byte[] secretKey = generateKey(128);
-            String filepath = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss")) + ".key";
-
-            // 2. Save key to file (byte -> hex string(utf-8))
-            FileOutputStream fos = new FileOutputStream(filepath);
-            fos.write(Encrypter.byteArrayToHexString(secretKey).getBytes(StandardCharsets.UTF_8));
-            fos.close();
-
-            // 3. Load and print file (hex string(utf-8) -> byte)
-            String hexString = Files.readAllLines(Paths.get(filepath), StandardCharsets.UTF_8).get(0);
-
-            System.out.println("Generated "+filepath);
-            System.out.println("hexString : "+hexString);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
     }
 }

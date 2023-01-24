@@ -1,4 +1,5 @@
 import com.encrypter.Encrypter;
+import com.encrypter.KeyGenerator;
 import com.encrypter.SymmetricEncrypter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -10,7 +11,7 @@ public class SymmetricEncrypterTest {
     @Test
     @Disabled
     public void generateAndPrintKey() {
-        SymmetricEncrypter.generateAndPrintKey();
+        KeyGenerator.generateAndPrintKey();
     }
 
     @Test

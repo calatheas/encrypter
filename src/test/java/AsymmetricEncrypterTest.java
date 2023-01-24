@@ -1,5 +1,6 @@
 import com.encrypter.AsymmetricEncrypter;
 import com.encrypter.Encrypter;
+import com.encrypter.KeyGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -13,7 +14,7 @@ public class AsymmetricEncrypterTest {
     @Test
     @Disabled
     public void generateKeyPair() {
-        AsymmetricEncrypter.generateKeyPair();
+        KeyGenerator.generateKeyPair();
     }
 
     @Test
