@@ -1,16 +1,18 @@
 import com.encrypter.Encrypter;
+import com.encrypter.KeyGenerator;
 import com.encrypter.SymmetricEncrypter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
+
 public class SymmetricEncrypterTest {
-    private Encrypter encrypter = new SymmetricEncrypter("61731D3B905CBF544268119046E0A986");
+    private Encrypter encrypter = new SymmetricEncrypter("pGavtHd0tNJYFSQW3PXsGQ==");
 
     @Test
-    @Disabled
     public void generateAndPrintKey() {
-        SymmetricEncrypter.generateAndPrintKey();
+        KeyGenerator.generateAndPrintKey();
     }
 
     @Test
