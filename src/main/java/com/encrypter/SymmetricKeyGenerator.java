@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
-public class KeyGenerator {
+public class SymmetricKeyGenerator {
     private static byte[] generateKey(int n) throws NoSuchAlgorithmException {
         javax.crypto.KeyGenerator keyGenerator = javax.crypto.KeyGenerator.getInstance("AES");
         keyGenerator.init(n);
@@ -20,9 +20,13 @@ public class KeyGenerator {
         return key.getEncoded();
     }
 
-    public static void generateAndPrintKey() {
+    public static void generateAndPrintKey(AesType aesType) {
+        generateAndPrintKey(aesType.keyLenth);
+    }
+
+    public static void generateAndPrintKey(Integer size) {
         try {
-            byte[] secretKey = generateKey(128);
+            byte[] secretKey = generateKey(size == null ? AesType.AES128.keyLenth : size);
             System.out.println("Base64 key : " + Base64.getEncoder().encodeToString(secretKey));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
