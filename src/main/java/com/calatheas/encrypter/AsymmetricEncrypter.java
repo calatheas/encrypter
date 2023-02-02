@@ -1,24 +1,15 @@
-package com.encrypter;
+package com.calatheas.encrypter;
 
 import javax.crypto.Cipher;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
-import static com.encrypter.KeyGenerator.byteArrayToHexString;
-import static com.encrypter.KeyGenerator.hexStringToByteArray;
+import static com.calatheas.encrypter.KeyGenerator.hexStringToByteArray;
 
 public class AsymmetricEncrypter implements Encrypter {
     private String charsetName = "UTF-8";

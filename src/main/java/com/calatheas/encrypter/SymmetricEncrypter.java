@@ -1,23 +1,11 @@
-package com.encrypter;
+package com.calatheas.encrypter;
 
 import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.security.GeneralSecurityException;
-import java.security.NoSuchAlgorithmException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 
-import static com.encrypter.KeyGenerator.byteArrayToHexString;
-import static com.encrypter.KeyGenerator.hexStringToByteArray;
+import static com.calatheas.encrypter.KeyGenerator.hexStringToByteArray;
 
 public class SymmetricEncrypter implements Encrypter {
     private String charsetName = "UTF-8";

@@ -1,4 +1,4 @@
-package com.encrypter;
+package com.calatheas.encrypter;
 
 import javax.crypto.SecretKey;
 import java.io.FileNotFoundException;

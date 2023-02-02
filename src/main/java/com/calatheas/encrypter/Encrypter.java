@@ -1,4 +1,4 @@
-package com.encrypter;
+package com.calatheas.encrypter;
 
 public interface Encrypter {
     String encrypt(String normalString);
