@@ -1,4 +1,4 @@
-package com.encrypter;
+package com.calatheas.encrypter;
 
 public enum AesType {
     AES128(128),

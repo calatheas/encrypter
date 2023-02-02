@@ -1,6 +1,6 @@
-import com.encrypter.AesType;
-import com.encrypter.SymmetricEncrypter;
-import com.encrypter.SymmetricKeyGenerator;
+import com.calatheas.encrypter.AesType;
+import com.calatheas.encrypter.SymmetricEncrypter;
+import com.calatheas.encrypter.SymmetricKeyGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
